@@ -29,6 +29,44 @@ class Classifier:
             ]
         )
 
+    def plot_feature_importance(self, model="user"):
+        """
+        Plot feature importance for either the user or critic model.
+        model="user"  -> user_reg_model
+        model="critic" -> critic_reg_model
+        """
+
+        if model == "user":
+            rf = self.user_reg_model.named_steps["regressor"]
+            encoder = self.user_reg_model.named_steps["preprocess"].named_transformers_["cat"]
+        elif model == "critic":
+            rf = self.critic_reg_model.named_steps["regressor"]
+            encoder = self.critic_reg_model.named_steps["preprocess"].named_transformers_["cat"]
+        else:
+            raise ValueError("model must be 'user' or 'critic'")
+
+        # Get feature names after one-hot encoding
+        encoded_feature_names = encoder.get_feature_names_out(self.categorical_features)
+
+        # Match them with importances
+        importances = rf.feature_importances_
+        feature_data = pd.DataFrame({
+            "feature": encoded_feature_names,
+            "importance": importances
+        }).sort_values("importance", ascending=False)
+
+        # Plot top 20 for readability
+        top_n = 20
+        plt.figure(figsize=(10, 7))
+        sns.barplot(y=feature_data.head(top_n)["feature"], 
+                    x=feature_data.head(top_n)["importance"], 
+                    orient="h")
+        plt.title(f"Top {top_n} Feature Importances ({model.capitalize()} Rating Model)")
+        plt.xlabel("Importance")
+        plt.ylabel("Feature")
+        plt.tight_layout()
+        plt.show()
+
     def train(self):
         self.user_reg_model = Pipeline(steps=[
             ('preprocess', self.preprocess),
@@ -211,5 +249,7 @@ if __name__ == "__main__":
     classifier = Classifier(df)
     classifier.train()
     classifier.evaluate()
+    classifier.plot_feature_importance(model="user")
+    classifier.plot_feature_importance(model="critic")
     classifier.plot_magic_quadrant()
     classifier.plot_predicted_quadrants()

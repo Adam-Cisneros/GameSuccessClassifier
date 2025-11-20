@@ -9,7 +9,7 @@ def build_heuristic_predictions(df_train, df_pred, k=5, weights=None):
     df_train: DataFrame used to compute historical averages (training set)
     df_pred: DataFrame to produce heuristic predictions for
     k: shrinkage constant (higher -> more shrink toward global mean)
-    weights: dict of weights for ['developer','publisher','genres'] defaults to dev 0.5, pub 0.3, genre 0.2
+    weights: dict of weights for ['developer','publisher','genres']
     Returns df_pred with columns 'heur_user' and 'heur_critic'
     """
     if weights is None:
