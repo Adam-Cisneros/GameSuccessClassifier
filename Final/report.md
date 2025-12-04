@@ -11,13 +11,15 @@ The initial phase of this project involved developing a comprehensive understand
 
 To build this understanding, I graphed the primary columns of the dataset. Key findings from this exploratory analysis are summarized below:
     * There were very few null values across most columns, with the exception of the “Type” column, which contained about 25% null entries. See graph below:
-    ![Nulls](images/Nulls.png "Nulls")
+    ![Nulls](Images/Nulls.png "Nulls")
 
     * I observed no null values in the “User Rating” column, which appeared unusual. After plotting the column as a continuous line chart, I found a significant number of zero values. Further investigation revealed that the API uses zeros in this column to represent null values. These zero entries introduced unnecessary noise and non-informative data. Additionally, this plot displayed a spike around the 1.0–1.5 range, indicating a skewed, multimodal distribution—an important observation that influenced later modeling decisions. See graph below:
-    ![User Rating Distribution](images/URating.png "User Rating Distribution")
+
+    ![User Rating Distribution](Images/URating.png "User Rating Distribution")
 
     * A plot of “Metacritic Score” vs. “User Rating” revealed no clear visual correlation between the two metrics. This lack of visible relationship suggested that a predictive model—such as the one developed in this project—could provide meaningful insight.See graph below:
-    ![Rating Correlation](images/RatingCorr.png "Rating Correlation")
+
+    ![Rating Correlation](Images/RatingCorr.png "Rating Correlation")
 
 Using these insights, I then carried out the following data-cleaning steps:
     * Excluding the “Type” column from the feature set, due to the high proportion of null entries
@@ -50,7 +52,7 @@ Model performance was evaluated using a combination of visual assessments and qu
 
 First, a visual confusion matrix was generated to compare the model’s predicted classifications with the ground-truth classifications. Results indicated that the model performed strongly in identifying High User / High Critic and Low User / Low Critic outcomes. Performance was comparatively weaker in the High User / Low Critic and Low User / High Critic quadrants, indicating that the model could reliably identify overall good or bad performance but had more difficulty distinguishing cases where critic and user responses diverged. See graph below:
 
-![Confusion Matrix](images/ConfMat.png "Confusion Matrix")
+![Confusion Matrix](Images/ConfMat.png "Confusion Matrix")
 
 Next, standard regression and classification metrics were computed:
     * Mean Absolute Error (MAE): Approximately 2%–3% relative to the data range, indicating consistently accurate predictions
@@ -65,7 +67,7 @@ Next, standard regression and classification metrics were computed:
 
 Finally, I plotted the actual data (left) and predicted data (right) using the computed quadrant boundaries. Both plots demonstrated similar overall structures, with the primary difference being a slight translation in coordinate space. Specifically, the model tended to predict somewhat higher user ratings and a slightly more compact spread for both metrics. See graph below:
 
-![Final Classification Comparison](images/FinalClass.png "Final Classification Comparison")
+![Final Classification Comparison](Images/FinalClass.png "Final Classification Comparison")
 
 ## Conclusion
 With an accuracy of 87% and strong supporting metrics, this model provides a credible method for predicting game performance across both user and critic dimensions. While it demonstrates some difficulty in cases where user and critic responses diverge, it makes relatively few errors in the context of the overall dataset.
