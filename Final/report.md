@@ -11,15 +11,13 @@ The initial phase of this project involved developing a comprehensive understand
 
 To build this understanding, I graphed the primary columns of the dataset. Key findings from this exploratory analysis are summarized below:
     * There were very few null values across most columns, with the exception of the “Type” column, which contained about 25% null entries. See graph below:
-    ![Nulls](Images/Nulls.png "Nulls")
+![Nulls](Images/Nulls.png "Nulls")
 
     * I observed no null values in the “User Rating” column, which appeared unusual. After plotting the column as a continuous line chart, I found a significant number of zero values. Further investigation revealed that the API uses zeros in this column to represent null values. These zero entries introduced unnecessary noise and non-informative data. Additionally, this plot displayed a spike around the 1.0–1.5 range, indicating a skewed, multimodal distribution—an important observation that influenced later modeling decisions. See graph below:
-
-    ![User Rating Distribution](Images/URating.png "User Rating Distribution")
+![User Rating Distribution](Images/URating.png "User Rating Distribution")
 
     * A plot of “Metacritic Score” vs. “User Rating” revealed no clear visual correlation between the two metrics. This lack of visible relationship suggested that a predictive model—such as the one developed in this project—could provide meaningful insight.See graph below:
-
-    ![Rating Correlation](Images/RatingCorr.png "Rating Correlation")
+![Rating Correlation](Images/RatingCorr.png "Rating Correlation")
 
 Using these insights, I then carried out the following data-cleaning steps:
     * Excluding the “Type” column from the feature set, due to the high proportion of null entries
