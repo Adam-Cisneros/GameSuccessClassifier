@@ -10,6 +10,7 @@ The second group includes users and consumers seeking to understand whether crit
 The initial phase of this project involved developing a comprehensive understanding of the dataset and performing cleaning procedures to ensure that the data was both meaningful and suitable for model training.
 
 To build this understanding, I graphed the primary columns of the dataset. Key findings from this exploratory analysis are summarized below:
+
     * There were very few null values across most columns, with the exception of the “Type” column, which contained about 25% null entries. See graph below:
 ![Nulls](Images/Nulls.png "Nulls")
 
@@ -20,6 +21,7 @@ To build this understanding, I graphed the primary columns of the dataset. Key f
 ![Rating Correlation](Images/RatingCorr.png "Rating Correlation")
 
 Using these insights, I then carried out the following data-cleaning steps:
+
     * Excluding the “Type” column from the feature set, due to the high proportion of null entries
 
     * Removing all remaining rows with null values
@@ -30,6 +32,7 @@ Using these insights, I then carried out the following data-cleaning steps:
 After cleaning, the dataset was temporally split to prevent information leakage later in the process. The data was sorted by release date, with the earliest 80% designated as training data and the most recent 20% as testing data. This temporal split ensured that calculated features would not inadvertently utilize future information.
 
 Next, I engineered several calculated features to improve the model’s predictive capability. These included:
+
     * Mean user reviews per developer
 
     * Mean user reviews per publisher
@@ -53,6 +56,7 @@ First, a visual confusion matrix was generated to compare the model’s predicte
 ![Confusion Matrix](Images/ConfMat.png "Confusion Matrix")
 
 Next, standard regression and classification metrics were computed:
+
     * Mean Absolute Error (MAE): Approximately 2%–3% relative to the data range, indicating consistently accurate predictions
 
     * Root Mean Squared Error (RMSE): Roughly double the MAE, suggesting occasional but infrequent larger errors
