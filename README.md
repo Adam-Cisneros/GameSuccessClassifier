@@ -14,7 +14,7 @@ The initial phase of this project involved developing a comprehensive understand
 To build this understanding, I graphed the primary columns of the dataset. Key findings from this exploratory analysis are summarized below:
 
     * There were very few null values across most columns, with the exception of the “Type” column, which contained about 25% null entries. See graph below:
-![Nulls](Images/Nulls.png "Nulls")
+![Nulls](Final/Images/Nulls.png "Nulls")
 
     * I observed no null values in the “User Rating” column, which appeared unusual. After plotting the column as a continuous line chart, I found a significant number of zero values. Further investigation revealed that the API uses zeros in this column to represent null values. These zero entries introduced unnecessary noise and non-informative data. Additionally, this plot displayed a spike around the 1.0–1.5 range, indicating a skewed, multimodal distribution—an important observation that influenced later modeling decisions. See graph below:
 ![User Rating Distribution](Images/URating.png "User Rating Distribution")
